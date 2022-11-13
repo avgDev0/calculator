@@ -1,0 +1,46 @@
+.container {
+  width: 100%;
+  height: 100%;
+  padding: 8px;
+
+  display: grid;
+  grid-template-rows: 25% auto;
+}
+
+.screen {
+  border: 1px solid red;
+  background-color: white;
+
+  display: grid;
+  grid-template-rows: 30% auto;
+}
+
+.buttons {
+  display: grid;
+  padding-top: 8px;
+  grid-template-columns: repeat(4, auto);
+  grid-template-rows: repeat(5, auto);
+  gap: 8px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.button.double {
+  grid-column: span 2;
+}
+
+@media only screen and (min-width: 850px) {
+  .container {
+    width: 30%;
+    height: 50%;
+    border: 1px solid black;
+    border-radius: 4px;
+  }
+}
