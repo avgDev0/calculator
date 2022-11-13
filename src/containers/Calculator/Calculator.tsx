@@ -3,11 +3,13 @@ import Screen from '../../components/Screen';
 import Buttons from './Buttons';
 import { Action } from './enums';
 import './styles.css';
+import { OperationItem } from './types';
 
 export default function Calculator() {
   const [currentNumber, setCurrentNumber] = useState<string | null>(null);
+  const [currentResult, setCurrentResult] = useState<string | null>(null);
   const [currentAction, setCurrentAction] = useState<Action | null>(null);
-  const [operation, setOperation] = useState<Array<string | Action>>([]);
+  const [operation, setOperation] = useState<Array<OperationItem>>([]);
 
   const handleNumberButtonClick = (value: string) => setCurrentNumber(v => {
     if (v) {
@@ -15,7 +17,7 @@ export default function Calculator() {
     }
 
     if (currentAction) {
-      setOperation(operation.concat(currentAction));
+      setOperation(operation.concat({ text: currentAction.toString(), type: 'action' }));
       setCurrentAction(null);
     }
 
@@ -50,7 +52,7 @@ export default function Calculator() {
         setCurrentAction(action);
         setOperation(op => {
           if (currentNumber) {
-            return op.concat(currentNumber);
+            return op.concat({ text: currentNumber, type: 'number' });
           }
 
           return op;
@@ -62,7 +64,6 @@ export default function Calculator() {
     }
   };
 
-  console.log({ currentAction });
   return (
     <div className="container">
       <Screen operation={operation} currentNumber={currentNumber} />

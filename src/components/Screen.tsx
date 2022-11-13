@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Action } from '../containers/Calculator/enums';
+import { OperationItem } from '../containers/Calculator/types';
 
 export type ScreenProps = {
-  operation: Array<string | Action>;
+  operation: Array<OperationItem>;
   currentNumber: string | null;
 };
 
@@ -11,7 +11,7 @@ export default function Screen({ operation, currentNumber }: ScreenProps) {
 
   useEffect(() => {
     setOperationText(operation.reduce<string>((acc, operationItem) => {
-      return acc + operationItem.toString();
+      return acc + operationItem.text;
     }, ''));
   }, [operation]);
 
