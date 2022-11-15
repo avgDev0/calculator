@@ -110,7 +110,7 @@ export default function Calculator() {
       <Screen currentOperationText={previousNumber && `${previousNumber}${currentAction ?? ''}`} currentNumber={currentNumber} />
       <Buttons
         currentAction={currentAction}
-        markCurrentAction={Boolean(currentNumber && !previousNumber || previousNumber && !currentNumber)}
+        markCurrentAction={Boolean((currentNumber && !previousNumber) || (previousNumber && !currentNumber))}
         onNumberClick={handleNumberButtonClick}
         onActionClick={handleActionClick}
       />
