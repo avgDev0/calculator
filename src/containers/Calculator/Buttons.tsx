@@ -11,7 +11,6 @@ export type ButtonsProps = {
 export default function Buttons({ onNumberClick, onActionClick, currentAction }: ButtonsProps) {
   const handleNumberClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const { currentTarget: { value } } = e;
-    console.log({ value });
 
     onNumberClick(value);
   };
@@ -105,7 +104,7 @@ export default function Buttons({ onNumberClick, onActionClick, currentAction }:
     {
       text: '=',
       type: 'double',
-      onClick: handleNumberClick,
+      onClick: () => onActionClick(Action.RESOLVE),
     },
   ];
 
@@ -123,6 +122,7 @@ export default function Buttons({ onNumberClick, onActionClick, currentAction }:
 
         return (
           <button
+            key={`button-${text}`}
             className={classes.join(' ')}
             value={text}
             onClick={onClick}

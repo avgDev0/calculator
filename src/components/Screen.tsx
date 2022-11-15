@@ -1,24 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import { OperationItem } from '../containers/Calculator/types';
+import React from 'react'
 
 export type ScreenProps = {
-  operation: Array<OperationItem>;
+  currentOperationText: string | null;
   currentNumber: string | null;
 };
 
-export default function Screen({ operation, currentNumber }: ScreenProps) {
-  const [operationText, setOperationText] = useState<string>('');
-
-  useEffect(() => {
-    setOperationText(operation.reduce<string>((acc, operationItem) => {
-      return acc + operationItem.text;
-    }, ''));
-  }, [operation]);
-
+export default function Screen({ currentOperationText, currentNumber }: ScreenProps) {
   return (
     <div className='screen'>
       <div className='operation'>
-        {operationText}
+        {currentOperationText ?? ''}
       </div>
       <div className='currentNumber'>
         {currentNumber ?? ''}
