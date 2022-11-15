@@ -10,18 +10,25 @@ export default function Calculator() {
   const [currentAction, setCurrentAction] = useState<Action | null>(null);
 
   const resolveOperation = (v1: number, v2: number, operation: Action) => {
+    let result = 0;
     switch (operation) {
       case Action.SUM:
-        return v1 + v2;
+        result = v1 + v2;
+        break;
       case Action.MINUS:
-        return v1 - v2;
+        result = v1 - v2;
+        break;
       case Action.DIVIDE:
-        return v1 / v2;
+        result = v1 / v2;
+        break;
       case Action.TIMES:
-        return v1 * v2;
+        result = v1 * v2;
+        break;
       default:
         return 0;
     }
+
+    return Number.parseFloat(result.toFixed(13));
   };
 
   const handleNumberButtonClick = (value: string) => {
@@ -95,7 +102,12 @@ export default function Calculator() {
   return (
     <div className="container">
       <Screen currentOperationText={previousNumber && `${previousNumber}${currentAction ?? ''}`} currentNumber={currentNumber} />
-      <Buttons currentAction={currentAction && !currentNumber ? currentAction : null} onNumberClick={handleNumberButtonClick} onActionClick={handleActionClick} />
+      <Buttons
+        currentAction={currentAction}
+        markCurrentAction={Boolean(currentNumber && !previousNumber || previousNumber && !currentNumber)}
+        onNumberClick={handleNumberButtonClick}
+        onActionClick={handleActionClick}
+      />
     </div>
   )
 }

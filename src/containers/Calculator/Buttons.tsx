@@ -3,12 +3,13 @@ import { Action } from './enums';
 import type { ButtonMeta } from './types';
 
 export type ButtonsProps = {
+  markCurrentAction: boolean;
   onNumberClick: (value: string) => void;
   onActionClick: (action: Action) => void;
   currentAction: Action | null;
 }
 
-export default function Buttons({ onNumberClick, onActionClick, currentAction }: ButtonsProps) {
+export default function Buttons({ markCurrentAction, onNumberClick, onActionClick, currentAction }: ButtonsProps) {
   const handleNumberClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const { currentTarget: { value } } = e;
 
@@ -99,7 +100,7 @@ export default function Buttons({ onNumberClick, onActionClick, currentAction }:
     {
       text: '.',
       type: 'single',
-      onClick: () => onActionClick(Action.CLEAR),
+      onClick: handleNumberClick,
     },
     {
       text: '=',
@@ -116,7 +117,7 @@ export default function Buttons({ onNumberClick, onActionClick, currentAction }:
           classes.push('double');
         }
 
-        if (currentAction && currentAction.toString() === text) {
+        if (markCurrentAction && currentAction && currentAction.toString() === text) {
           classes.push('selected');
         }
 
