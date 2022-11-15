@@ -100,7 +100,7 @@ export default function Buttons({ markCurrentAction, onNumberClick, onActionClic
     {
       text: '.',
       type: 'single',
-      onClick: handleNumberClick,
+      onClick: () => onActionClick(Action.DOT),
     },
     {
       text: '=',

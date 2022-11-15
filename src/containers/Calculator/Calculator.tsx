@@ -28,7 +28,7 @@ export default function Calculator() {
         return 0;
     }
 
-    return Number.parseFloat(result.toFixed(13));
+    return Number.parseFloat(result.toFixed(9));
   };
 
   const handleNumberButtonClick = (value: string) => {
@@ -43,6 +43,12 @@ export default function Calculator() {
 
   const handleActionClick = (action: Action) => {
     switch (action) {
+      case Action.DOT:
+        if (currentNumber && !currentNumber.includes('.')) {
+          setCurrentNumber(currentNumber + '.');
+        }
+
+        break;
       case Action.CLEAR:
         setCurrentNumber(null);
         setCurrentAction(null);
